@@ -6,11 +6,11 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   runtimeConfig: {
-    appDomain: process.env.APP_DOMAIN,
     adminUsername: process.env.ADMIN_USERNAME,
     adminPassword: process.env.ADMIN_PASSWORD,
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
     public: {
+      appDomain: process.env.APP_DOMAIN,
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,
     },

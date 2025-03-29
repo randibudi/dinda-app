@@ -1,7 +1,56 @@
 <script setup lang="ts">
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
+const config = useRuntimeConfig().public;
+
 const username = ref("");
 const password = ref("");
 const showPassword = ref(false);
+const isLoading = ref(false);
+const errorMessage = ref<string | null>(null);
+
+async function handleLogin() {
+  try {
+    isLoading.value = true;
+    errorMessage.value = null;
+
+    const email = `${username.value}@${config.appDomain}`;
+
+    const {
+      data: { user: authUser },
+      error,
+    } = await supabase.auth.signInWithPassword({
+      email,
+      password: password.value,
+    });
+
+    if (error) throw error;
+
+    const userRole = authUser.app_metadata?.role;
+
+    if (userRole === "admin") {
+      await navigateTo("/admin");
+    } else {
+      await navigateTo("/");
+    }
+  } catch (error: any) {
+    if (error.message.includes("Invalid login credentials")) {
+      errorMessage.value = "Username atau Password salah";
+    } else {
+      errorMessage.value = error.message || "Terjadi kesalahan saat login";
+    }
+  } finally {
+    isLoading.value = false;
+    username.value = "";
+    password.value = "";
+  }
+}
+
+if (user.value) {
+  const role = user.value?.app_metadata?.role;
+
+  navigateTo(role === "admin" ? "/admin" : "/");
+}
 </script>
 
 <template>
@@ -53,9 +102,20 @@ const showPassword = ref(false);
               block
               size="lg"
               :disabled="!username || !password"
+              :loading="isLoading"
               class="cursor-pointer disabled:bg-neutral-400"
+              @click="handleLogin"
               >Login</UButton
             >
+
+            <UAlert
+              v-if="errorMessage"
+              title="Login Gagal!"
+              :description="errorMessage"
+              color="error"
+              variant="subtle"
+              icon="i-heroicons-exclamation-triangle"
+            />
           </div>
         </UCard>
       </div>

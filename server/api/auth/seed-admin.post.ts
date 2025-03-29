@@ -6,7 +6,7 @@ import { users } from "~~/server/db/schema";
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const client = serverSupabaseServiceRole(event);
-  const adminEmail = `${config.adminUsername}@${config.appDomain}`;
+  const adminEmail = `${config.adminUsername}@${config.public.appDomain}`;
 
   // Check for existing admin
   const existingAdmin = await db.query.users.findFirst({
@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
       password: config.adminPassword,
       email_confirm: true,
       user_metadata: { full_name: "Administrator" },
+      app_metadata: { role: "admin" },
     });
 
   if (authError) {
