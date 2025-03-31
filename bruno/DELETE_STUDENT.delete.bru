@@ -1,0 +1,11 @@
+meta {
+  name: Delete Student
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{base_url}}/api/students/{{student_id}}
+  body: none
+  auth: inherit
+}
