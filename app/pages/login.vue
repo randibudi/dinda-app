@@ -2,18 +2,16 @@
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 const config = useRuntimeConfig().public;
+const toast = useToast();
 
 const username = ref("");
 const password = ref("");
 const showPassword = ref(false);
 const isLoading = ref(false);
-const errorMessage = ref<string | null>(null);
 
-async function handleLogin() {
+const handleLogin = async () => {
   try {
     isLoading.value = true;
-    errorMessage.value = null;
-
     const email = `${username.value}@${config.appDomain}`;
 
     const {
@@ -26,29 +24,30 @@ async function handleLogin() {
 
     if (error) throw error;
 
-    const userRole = authUser.app_metadata?.role;
-
-    if (userRole === "admin") {
-      await navigateTo("/admin");
-    } else {
-      await navigateTo("/");
-    }
+    const userRole = authUser!.app_metadata?.role;
+    await navigateTo(userRole === "admin" ? "/admin" : "/");
   } catch (error: any) {
+    let errorMessage = "Terjadi kesalahan saat login";
+
     if (error.message.includes("Invalid login credentials")) {
-      errorMessage.value = "Username atau Password salah";
-    } else {
-      errorMessage.value = error.message || "Terjadi kesalahan saat login";
+      errorMessage = "Username atau Password salah";
     }
+
+    toast.add({
+      title: "Login Gagal",
+      description: errorMessage,
+      color: "error",
+      icon: "i-heroicons-exclamation-triangle",
+    });
   } finally {
     isLoading.value = false;
     username.value = "";
     password.value = "";
   }
-}
+};
 
 if (user.value) {
   const role = user.value?.app_metadata?.role;
-
   navigateTo(role === "admin" ? "/admin" : "/");
 }
 </script>
@@ -91,7 +90,6 @@ if (user.value) {
                     variant="link"
                     size="sm"
                     :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-                    class="cursor-pointer"
                     @click="showPassword = !showPassword"
                   />
                 </template>
@@ -103,19 +101,9 @@ if (user.value) {
               size="lg"
               :disabled="!username || !password"
               :loading="isLoading"
-              class="cursor-pointer disabled:bg-neutral-400"
               @click="handleLogin"
               >Login</UButton
             >
-
-            <UAlert
-              v-if="errorMessage"
-              title="Login Gagal!"
-              :description="errorMessage"
-              color="error"
-              variant="subtle"
-              icon="i-heroicons-exclamation-triangle"
-            />
           </div>
         </UCard>
       </div>
