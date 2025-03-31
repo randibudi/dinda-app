@@ -19,7 +19,7 @@
     <!-- Navigation Bar -->
     <nav class="sticky bottom-0 z-10">
       <ul
-        class="mx-auto flex h-[65px] w-full max-w-[480px] items-center justify-around border-t border-(--ui-border) bg-white"
+        class="mx-auto flex h-[65px] w-full max-w-[480px] items-center justify-around border-t border-(--ui-border-accented) bg-white"
       >
         <li>Menu 1</li>
         <li>Menu 2</li>
