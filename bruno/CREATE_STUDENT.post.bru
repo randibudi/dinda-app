@@ -1,0 +1,20 @@
+meta {
+  name: Create New Student
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/students
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "fullname": "Budi Santoso",
+    "username": "budi123",
+    "password": "PasswordAman123!",
+    "grade": "IV"
+  }
+}
