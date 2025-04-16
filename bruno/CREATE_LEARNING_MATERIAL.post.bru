@@ -1,0 +1,17 @@
+meta {
+  name: Create Learning Material
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{base_url}}/api/learning-materials
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  title: 
+  content: 
+  documentFile: @file()
+}
