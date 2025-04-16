@@ -1,0 +1,17 @@
+meta {
+  name: Update Learning Material
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{base_url}}/api/learning-materials/{{learning_material_id}}
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  title: 
+  content: 
+  documentFile: @file()
+}
