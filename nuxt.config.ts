@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       appDomain: process.env.APP_DOMAIN,
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,
+      tinymceKey: process.env.TINYMCE_KEY,
     },
   },
   modules: ["@nuxt/ui", "@nuxt/eslint", "@nuxtjs/supabase"],

@@ -18,9 +18,11 @@
     "@iconify-json/simple-icons": "^1.2.29",
     "@nuxt/ui": "^3.0.2",
     "@nuxtjs/supabase": "^1.5.0",
+    "@tinymce/tinymce-vue": "^6.1.0",
     "drizzle-orm": "^0.41.0",
     "nuxt": "^3.16.1",
-    "postgres": "^3.4.5"
+    "postgres": "^3.4.5",
+    "tinymce": "^7.8.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.2.0",
