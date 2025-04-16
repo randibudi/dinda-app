@@ -1,0 +1,11 @@
+meta {
+  name: Delete Learning Material
+  type: http
+  seq: 11
+}
+
+delete {
+  url: {{base_url}}/api/learning-materials/{{learning_material_id}}
+  body: none
+  auth: inherit
+}
