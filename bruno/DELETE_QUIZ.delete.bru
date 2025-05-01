@@ -1,0 +1,11 @@
+meta {
+  name: Delete Quiz by ID
+  type: http
+  seq: 15
+}
+
+delete {
+  url: {{base_url}}/api/quiz/{{quiz_id}}
+  body: none
+  auth: inherit
+}
