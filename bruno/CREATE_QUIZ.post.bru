@@ -1,0 +1,23 @@
+meta {
+  name: Create Quiz
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{base_url}}/api/quiz
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "question": "Apa ibukota Indonesia?",
+    "optionA": "Jakarta",
+    "optionB": "Bandung",
+    "optionC": "Surabaya",
+    "optionD": "Medan",
+    "correctAnswer": "a",
+    "materialId": "f1602a32-2163-4596-a62f-2a2ccfdee28f"
+  }
+}
