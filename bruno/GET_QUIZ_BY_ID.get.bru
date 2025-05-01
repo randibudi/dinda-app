@@ -1,0 +1,11 @@
+meta {
+  name: Get Quiz by ID
+  type: http
+  seq: 13
+}
+
+get {
+  url: {{base_url}}/api/quiz/{{quiz_id}}
+  body: none
+  auth: inherit
+}
