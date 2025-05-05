@@ -7,6 +7,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 import { authUsers } from "drizzle-orm/supabase";
+import { relations } from "drizzle-orm";
 
 export const userRole = pgEnum("user_role", ["admin", "student"]);
 export const answerOption = pgEnum("answer_option", ["a", "b", "c", "d"]);
@@ -20,6 +21,11 @@ export const users = pgTable("users", {
   role: userRole("role").default("student"),
   grade: varchar("grade", { length: 10 }).default("IV"),
 });
+
+export const usersRelations = relations(users, ({ many }) => ({
+  discussions: many(discussions),
+  comments: many(comments),
+}));
 
 export const learningMaterials = pgTable("learning_materials", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -44,3 +50,45 @@ export const quizzes = pgTable("quizzes", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+export const discussions = pgTable("discussions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  content: text("content").notNull(),
+  authorId: uuid("author_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const discussionsRelations = relations(discussions, ({ one, many }) => ({
+  author: one(users, {
+    fields: [discussions.authorId],
+    references: [users.id],
+  }),
+  comments: many(comments),
+}));
+
+export const comments = pgTable("comments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  content: text("content").notNull(),
+  authorId: uuid("author_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  discussionId: uuid("discussion_id")
+    .notNull()
+    .references(() => discussions.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const commentsRelations = relations(comments, ({ one }) => ({
+  author: one(users, {
+    fields: [comments.authorId],
+    references: [users.id],
+  }),
+  discussion: one(discussions, {
+    fields: [comments.discussionId],
+    references: [discussions.id],
+  }),
+}));
