@@ -12,9 +12,9 @@
       <li>
         <ULink to="/admin/quiz">Quiz</ULink>
       </li>
-      <li>Menu 4</li>
-      <li>Menu 5</li>
-      <li>Menu 6</li>
+      <li>
+        <ULink to="/diskusi">Diskusi</ULink>
+      </li>
     </ul>
   </nav>
 </template>
