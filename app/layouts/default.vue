@@ -6,7 +6,11 @@
         class="mx-auto flex h-[60px] w-full max-w-[480px] items-center gap-4 px-4"
       >
         <slot name="header">
-          <h1 class="text-2xl font-bold text-(--ui-bg)">DINDA</h1>
+          <img
+            src="~/assets/icons/logo-dinda.png"
+            alt="Logo DINDA"
+            class="h-12"
+          />
         </slot>
       </div>
     </header>
