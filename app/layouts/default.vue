@@ -1,3 +1,7 @@
+<script setup>
+const route = useRoute();
+</script>
+
 <template>
   <div class="flex min-h-screen flex-col">
     <!-- Header -->
@@ -7,9 +11,9 @@
       >
         <slot name="header">
           <img
-            src="~/assets/icons/logo-dinda.png"
+            src="~/assets/icons/dinda-logo-tagline.png"
             alt="Logo DINDA"
-            class="h-12"
+            class="h-11"
           />
         </slot>
       </div>
@@ -21,6 +25,6 @@
     </main>
 
     <!-- Navigation Bar -->
-    <Navbar />
+    <Navbar v-if="$route.path !== '/login'" />
   </div>
 </template>
