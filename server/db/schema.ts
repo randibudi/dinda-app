@@ -5,6 +5,7 @@ import {
   pgEnum,
   text,
   timestamp,
+  integer,
 } from "drizzle-orm/pg-core";
 import { authUsers } from "drizzle-orm/supabase";
 import { relations } from "drizzle-orm";
@@ -25,6 +26,7 @@ export const users = pgTable("users", {
 export const usersRelations = relations(users, ({ many }) => ({
   discussions: many(discussions),
   comments: many(comments),
+  quizAttempts: many(quizAttempts),
 }));
 
 export const learningMaterials = pgTable("learning_materials", {
@@ -50,6 +52,31 @@ export const quizzes = pgTable("quizzes", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+export const quizAttempts = pgTable("quiz_attempts", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  materialId: uuid("material_id")
+    .notNull()
+    .references(() => learningMaterials.id, { onDelete: "cascade" }),
+  score: integer("score").notNull(),
+  totalQuestions: integer("total_questions").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const quizAttemptsRelations = relations(quizAttempts, ({ one }) => ({
+  user: one(users, {
+    fields: [quizAttempts.userId],
+    references: [users.id],
+  }),
+  material: one(learningMaterials, {
+    fields: [quizAttempts.materialId],
+    references: [learningMaterials.id],
+  }),
+}));
 
 export const discussions = pgTable("discussions", {
   id: uuid("id").primaryKey().defaultRandom(),
