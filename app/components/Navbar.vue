@@ -33,6 +33,9 @@ const isAdmin = computed(() => {
           <ULink to="/">Beranda</ULink>
         </li>
         <li>
+          <ULink to="/materi">Materi</ULink>
+        </li>
+        <li>
           <ULink to="/diskusi">Diskusi</ULink>
         </li>
       </template>
