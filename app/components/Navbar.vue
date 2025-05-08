@@ -25,6 +25,9 @@ const isAdmin = computed(() => {
         <li>
           <ULink to="/diskusi">Diskusi</ULink>
         </li>
+        <li>
+          <ULink to="/akun">Akun</ULink>
+        </li>
       </template>
 
       <!-- User View -->
@@ -37,6 +40,9 @@ const isAdmin = computed(() => {
         </li>
         <li>
           <ULink to="/diskusi">Diskusi</ULink>
+        </li>
+        <li>
+          <ULink to="/akun">Akun</ULink>
         </li>
       </template>
     </ul>
