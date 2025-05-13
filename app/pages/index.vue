@@ -1,7 +1,13 @@
 <template>
   <div>
     <NuxtLayout>
-      <div>Home Page</div>
+      <div>
+        <img
+          src="~/assets/imgs/pamflet-home.png"
+          alt="Pamflet Home"
+          class="w-full"
+        />
+      </div>
     </NuxtLayout>
   </div>
 </template>
