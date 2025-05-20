@@ -48,7 +48,11 @@ const fetchDiscussions = async () => {
       })),
     }));
   } catch (error: any) {
-    toast.error("Gagal memuat diskusi");
+    toast.add({
+      title: "Gagal!",
+      description: "Gagal memuat diskusi",
+      color: "error",
+    });
   } finally {
     isLoading.value = false;
   }
@@ -199,7 +203,11 @@ const updateComment = async (comment: any) => {
   try {
     const updatedContent = comment.editContent.trim();
     if (!updatedContent) {
-      toast.warning("Konten komentar tidak boleh kosong");
+      toast.add({
+        title: "Peringatan!",
+        description: "Komentar tidak boleh kosong",
+        color: "warning",
+      });
       return;
     }
 
@@ -211,7 +219,12 @@ const updateComment = async (comment: any) => {
     comment.content = updatedContent;
     comment.isEditing = false;
     comment.editContent = "";
-    toast.success("Komentar berhasil diperbarui");
+
+    toast.add({
+      title: "Berhasil!",
+      description: "Komentar berhasil diperbarui",
+      color: "success",
+    });
   } catch (error: any) {
     toast.add({
       title: "Error",
@@ -319,14 +332,14 @@ onMounted(fetchDiscussions);
                 <UButton
                   v-if="!discussion.isEditing"
                   icon="i-heroicons-trash-20-solid"
-                  color="gray"
+                  color="neutral"
                   variant="ghost"
                   @click="deleteDiscussion(discussion.id)"
                 />
                 <UButton
                   v-if="!discussion.isEditing"
                   icon="i-heroicons-pencil-square"
-                  color="gray"
+                  color="neutral"
                   variant="ghost"
                   class="ml-2"
                   @click="startEditingDiscussion(discussion)"
@@ -353,7 +366,7 @@ onMounted(fetchDiscussions);
                 />
                 <UButton
                   label="Batal"
-                  color="gray"
+                  color="neutral"
                   variant="ghost"
                   class="ml-2"
                   @click="cancelEditDiscussion(discussion)"
@@ -396,7 +409,7 @@ onMounted(fetchDiscussions);
                     >
                       <UButton
                         icon="i-heroicons-trash-20-solid"
-                        color="gray"
+                        color="neutral"
                         variant="ghost"
                         size="xs"
                         @click="deleteComment(comment.id)"
@@ -404,7 +417,7 @@ onMounted(fetchDiscussions);
                       <UButton
                         v-if="!comment.isEditing"
                         icon="i-heroicons-pencil-square"
-                        color="gray"
+                        color="neutral"
                         variant="ghost"
                         size="xs"
                         class="ml-2"
@@ -437,7 +450,7 @@ onMounted(fetchDiscussions);
                       />
                       <UButton
                         label="Batal"
-                        color="gray"
+                        color="neutral"
                         variant="ghost"
                         class="ml-2"
                         @click="cancelEditComment(comment)"
@@ -448,7 +461,7 @@ onMounted(fetchDiscussions);
               </div>
 
               <!-- Comment Input -->
-              <div class="mt-4 flex gap-3">
+              <div class="mt-4 flex justify-between">
                 <UAvatar
                   :src="currentUser?.avatar"
                   :alt="currentUser?.fullname"
@@ -459,9 +472,16 @@ onMounted(fetchDiscussions);
                   v-model="newComments[discussion.id]"
                   placeholder="Tulis komentar..."
                   size="sm"
-                  :ui="{ base: 'rounded-full px-4' }"
-                  class="flex-1"
-                  @keyup.enter="createComment(discussion.id)"
+                  class="w-full rounded-full px-4"
+                  @keyup.enter.prevent
+                />
+                <UButton
+                  color="primary"
+                  variant="solid"
+                  icon="i-heroicons-paper-airplane-20-solid"
+                  :disabled="!newComments[discussion.id]?.trim()"
+                  class="rounded-full"
+                  @click="createComment(discussion.id)"
                 />
               </div>
             </div>
