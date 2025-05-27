@@ -13,6 +13,7 @@ import { relations } from "drizzle-orm";
 export const userRole = pgEnum("user_role", ["admin", "student"]);
 export const answerOption = pgEnum("answer_option", ["a", "b", "c", "d"]);
 export const assignmentType = pgEnum("assignment_type", ["file", "text"]);
+export type AssignmentType = (typeof assignmentType.enumValues)[number];
 
 export const users = pgTable("users", {
   id: uuid("id")
