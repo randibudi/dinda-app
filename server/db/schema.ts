@@ -12,6 +12,7 @@ import { relations } from "drizzle-orm";
 
 export const userRole = pgEnum("user_role", ["admin", "student"]);
 export const answerOption = pgEnum("answer_option", ["a", "b", "c", "d"]);
+export const assignmentType = pgEnum("assignment_type", ["file", "text"]);
 
 export const users = pgTable("users", {
   id: uuid("id")
@@ -27,6 +28,8 @@ export const usersRelations = relations(users, ({ many }) => ({
   discussions: many(discussions),
   comments: many(comments),
   quizAttempts: many(quizAttempts),
+  createdAssignments: many(assignments),
+  assignmentSubmissions: many(assignmentSubmissions),
 }));
 
 export const learningMaterials = pgTable("learning_materials", {
@@ -119,3 +122,57 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     references: [discussions.id],
   }),
 }));
+
+export const assignments = pgTable("assignments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  type: assignmentType("type").notNull(),
+  question: text("question").notNull(),
+  documentUrl: varchar("document_url", { length: 1024 }),
+  dueDate: timestamp("due_date").notNull(),
+  grade: varchar("grade", { length: 10 }).notNull().default("IV"),
+  authorId: uuid("author_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const assignmentsRelations = relations(assignments, ({ one, many }) => ({
+  author: one(users, {
+    fields: [assignments.authorId],
+    references: [users.id],
+  }),
+  submissions: many(assignmentSubmissions),
+}));
+
+export const assignmentSubmissions = pgTable("assignment_submissions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  assignmentId: uuid("assignment_id")
+    .notNull()
+    .references(() => assignments.id, { onDelete: "cascade" }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  fileUrl: varchar("file_url", { length: 1024 }),
+  submissionText: text("submission_text"),
+  score: integer("score"),
+  feedback: text("feedback"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const assignmentSubmissionsRelations = relations(
+  assignmentSubmissions,
+  ({ one }) => ({
+    assignment: one(assignments, {
+      fields: [assignmentSubmissions.assignmentId],
+      references: [assignments.id],
+    }),
+    user: one(users, {
+      fields: [assignmentSubmissions.userId],
+      references: [users.id],
+    }),
+  }),
+);
