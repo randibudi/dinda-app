@@ -44,15 +44,13 @@ const initOptions = {
     "media",
     "table",
     "paste",
-    "code",
-    "help",
     "wordcount",
     "imagetools",
   ],
   toolbar:
     "undo redo | bold italic | \
         alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | image link charmap",
+        bullist numlist outdent indent | image media link charmap",
   paste_data_images: true,
   content_style: "img {max-width: 100%; height: auto;}",
   convert_urls: false,
