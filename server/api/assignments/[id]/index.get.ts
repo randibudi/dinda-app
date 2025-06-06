@@ -1,11 +1,11 @@
 import { db } from "~~/server/db/client";
 import { assignments } from "~~/server/db/schema";
 import { eq } from "drizzle-orm";
+import { serverSupabaseUser } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
 
-  // Validate assignment ID
   if (!id) {
     throw createError({
       statusCode: 400,
@@ -13,9 +13,20 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Fetch the assignment by ID
+  const user = await serverSupabaseUser(event);
+  const userId = user?.id;
+
   const assignment = await db.query.assignments.findFirst({
     where: eq(assignments.id, id),
+    with: {
+      author: true,
+      submissions: {
+        where: (submission, { eq }) =>
+          userId ? eq(submission.userId, userId) : undefined,
+        orderBy: (submission, { desc }) => [desc(submission.createdAt)],
+        limit: 1,
+      },
+    },
   });
 
   if (!assignment) {
@@ -25,10 +36,16 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const submission =
+    assignment.submissions.length > 0 ? assignment.submissions[0] : null;
+
   setResponseStatus(event, 200);
   return {
     statusCode: 200,
     message: "Data tugas berhasil diambil",
-    data: assignment,
+    data: {
+      ...assignment,
+      submission,
+    },
   };
 });
