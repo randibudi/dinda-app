@@ -13,6 +13,12 @@ import { relations } from "drizzle-orm";
 export const userRole = pgEnum("user_role", ["admin", "student"]);
 export const answerOption = pgEnum("answer_option", ["a", "b", "c", "d"]);
 export const assignmentType = pgEnum("assignment_type", ["file", "text"]);
+export const submissionStatus = pgEnum("submission_status", [
+  "pending",
+  "submitted",
+  "late",
+  "graded",
+]);
 export type AssignmentType = (typeof assignmentType.enumValues)[number];
 
 export const users = pgTable("users", {
@@ -159,7 +165,7 @@ export const assignmentSubmissions = pgTable("assignment_submissions", {
   fileUrl: varchar("file_url", { length: 1024 }),
   submissionText: text("submission_text"),
   score: integer("score"),
-  feedback: text("feedback"),
+  status: submissionStatus("status").default("pending"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
