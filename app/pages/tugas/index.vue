@@ -10,8 +10,7 @@ type Assignment = {
   submissions: {
     submittedAt?: string;
     score?: number;
-    feedback?: string;
-    status: "late" | "submitted" | "ungraded" | "missing";
+    status: "pending" | "submitted" | "late" | "graded";
   }[];
 };
 
@@ -24,8 +23,8 @@ const loading = ref(false);
 const fetchData = async () => {
   loading.value = true;
   try {
-    const { data } = await $fetch("/api/assignments");
-    assignments.value = data.map((assignment: any) => ({
+    const response = await $fetch("/api/assignments");
+    assignments.value = response.data.map((assignment: any) => ({
       ...assignment,
       submissions: assignment.submissions || [],
     }));
@@ -55,24 +54,39 @@ const formatDate = (dateString: string) => {
 // Status pengumpulan
 const submissionStatus = (assignment: Assignment) => {
   const latestSubmission = assignment.submissions[0];
+
   if (!latestSubmission) return "Belum dikumpulkan";
-  if (latestSubmission.status === "late") return "Terlambat";
-  if (latestSubmission.status === "submitted")
-    return latestSubmission.score
-      ? `Dinilai (${latestSubmission.score}/100)`
-      : "Menunggu penilaian";
-  if (latestSubmission.status === "missing") return "Belum dikumpulkan";
-  return "Dalam penilaian";
+
+  switch (latestSubmission.status) {
+    case "late":
+      return "Terlambat";
+    case "submitted":
+      return latestSubmission.score
+        ? `Dinilai (${latestSubmission.score}/100)`
+        : "Menunggu penilaian";
+    case "graded":
+      return `Dinilai (${latestSubmission.score}/100)`;
+    default:
+      return "Dalam penilaian";
+  }
 };
 
 // Status warna badge
 const statusColor = (assignment: Assignment) => {
   const latestSubmission = assignment.submissions[0];
+
   if (!latestSubmission) return "warning";
-  if (latestSubmission.status === "late") return "error";
-  if (latestSubmission.status === "submitted") return "success";
-  if (latestSubmission.status === "missing") return "warning";
-  return "info";
+
+  switch (latestSubmission.status) {
+    case "late":
+      return "error";
+    case "submitted":
+      return "info";
+    case "graded":
+      return "success";
+    default:
+      return "info";
+  }
 };
 
 // Navigasi ke halaman pengumpulan
@@ -102,8 +116,12 @@ onMounted(fetchData);
     <div class="mx-auto max-w-4xl px-4 py-8">
       <!-- Header -->
       <div class="mb-8 text-center">
-        <h1 class="mb-2 text-3xl font-bold text-gray-900">Daftar Tugas</h1>
-        <p class="text-gray-600">Kumpulkan tugas Kamu di sini</p>
+        <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+          Daftar Tugas
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300">
+          Kumpulkan tugas Kamu di sini
+        </p>
       </div>
 
       <!-- Loading State -->
@@ -112,7 +130,7 @@ onMounted(fetchData);
           name="i-heroicons-spinner-20-solid"
           class="text-primary-500 mx-auto h-8 w-8 animate-spin"
         />
-        <p class="mt-2 text-gray-600">Memuat tugas...</p>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Memuat tugas...</p>
       </div>
 
       <!-- Daftar Tugas -->
@@ -125,7 +143,7 @@ onMounted(fetchData);
           >
             <template #header>
               <div class="flex items-center justify-between gap-3">
-                <h3 class="text-lg font-semibold text-gray-900">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                   {{ assignment.title }}
                 </h3>
                 <div class="ml-2 flex items-center gap-2">
@@ -136,7 +154,7 @@ onMounted(fetchData);
                   >
                     {{ submissionStatus(assignment) }}
                   </UBadge>
-                  <span class="text-sm text-gray-500">
+                  <span class="text-sm text-gray-500 dark:text-gray-400">
                     {{ formatDate(assignment.dueDate) }}
                   </span>
                 </div>
@@ -145,13 +163,13 @@ onMounted(fetchData);
 
             <!-- Konten -->
             <div class="space-y-4">
-              <p class="line-clamp-3 text-gray-600">
+              <p class="line-clamp-3 text-gray-600 dark:text-gray-300">
                 {{ strippedDescription(assignment.description) }}
               </p>
 
               <div
                 v-if="assignment.submissions[0]?.submittedAt"
-                class="flex items-center gap-2 text-sm text-gray-500"
+                class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400"
               >
                 <UIcon name="i-heroicons-paper-airplane" class="h-5 w-5" />
                 <span
@@ -159,36 +177,22 @@ onMounted(fetchData);
                   {{ formatDate(assignment.submissions[0].submittedAt) }}</span
                 >
               </div>
-
-              <div
-                v-if="assignment.submissions[0]?.feedback"
-                class="mt-2 rounded-lg bg-gray-50 p-3"
-              >
-                <p class="text-sm font-medium text-gray-700">Feedback:</p>
-                <p class="text-sm text-gray-600">
-                  {{ assignment.submissions[0].feedback }}
-                </p>
-              </div>
             </div>
 
             <!-- Footer -->
             <template #footer>
               <UButton
-                :color="
-                  submissionStatus(assignment) === 'Belum dikumpulkan'
-                    ? 'primary'
-                    : 'neutral'
-                "
+                :color="!assignment.submissions.length ? 'primary' : 'neutral'"
                 :label="
-                  submissionStatus(assignment) === 'Belum dikumpulkan'
+                  !assignment.submissions.length
                     ? 'Kumpulkan Sekarang'
                     : 'Lihat Detail'
                 "
                 block
                 :trailing-icon="
-                  submissionStatus(assignment) === 'Belum dikumpulkan'
-                    ? undefined
-                    : 'i-heroicons-arrow-right'
+                  assignment.submissions.length
+                    ? 'i-heroicons-arrow-right'
+                    : undefined
                 "
                 @click="handleSubmit(assignment.id)"
               />
@@ -204,9 +208,9 @@ onMounted(fetchData);
       >
         <UIcon
           name="i-heroicons-document-text"
-          class="mx-auto mb-4 h-12 w-12 text-gray-400"
+          class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-500"
         />
-        <p class="text-gray-600">Tidak ada tugas saat ini</p>
+        <p class="text-gray-600 dark:text-gray-400">Tidak ada tugas saat ini</p>
       </div>
 
       <!-- Pagination Controls -->
