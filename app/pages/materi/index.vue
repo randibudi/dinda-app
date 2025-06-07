@@ -83,7 +83,7 @@ onMounted(fetchData);
 
 <template>
   <NuxtLayout>
-    <div class="mx-auto max-w-4xl px-4 py-8">
+    <div class="px-4 py-8">
       <!-- Page Header -->
       <div class="mb-8 text-center">
         <h1 class="mb-2 text-3xl font-bold text-gray-900">
@@ -139,7 +139,7 @@ onMounted(fetchData);
                   <div class="flex items-center gap-2">
                     <UBadge
                       v-if="isMaterialCompleted(material.id)"
-                      color="emerald"
+                      color="primary"
                       variant="subtle"
                     >
                       Selesai
