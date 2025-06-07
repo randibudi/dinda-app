@@ -13,6 +13,7 @@ const adminLinks = [
     label: "Quiz",
     icon: "i-heroicons-question-mark-circle",
   },
+  { path: "/admin/tugas", label: "Tugas", icon: "i-heroicons-document-text" },
   {
     path: "/admin/latihan",
     label: "Latihan",
@@ -23,19 +24,23 @@ const adminLinks = [
     label: "Diskusi",
     icon: "i-heroicons-chat-bubble-left-ellipsis",
   },
-  { path: "/admin/tugas", label: "Tugas", icon: "i-heroicons-document-text" },
   { path: "/akun", label: "Akun", icon: "i-heroicons-user-circle" },
 ];
 
 const userLinks = [
   { path: "/", label: "Beranda", icon: "i-heroicons-home" },
   { path: "/materi", label: "Materi", icon: "i-heroicons-book-open" },
+  { path: "/tugas", label: "Tugas", icon: "i-heroicons-document-text" },
+  {
+    path: "/latihan",
+    label: "Latihan",
+    icon: "i-heroicons-academic-cap",
+  },
   {
     path: "/diskusi",
     label: "Diskusi",
     icon: "i-heroicons-chat-bubble-left-ellipsis",
   },
-  { path: "/tugas", label: "Tugas", icon: "i-heroicons-document-text" },
   { path: "/akun", label: "Akun", icon: "i-heroicons-user-circle" },
 ];
 </script>
