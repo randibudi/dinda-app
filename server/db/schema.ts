@@ -19,7 +19,9 @@ export const submissionStatus = pgEnum("submission_status", [
   "late",
   "graded",
 ]);
+export const exerciseAnswer = pgEnum("exercise_answer", ["benar", "salah"]);
 export type AssignmentType = (typeof assignmentType.enumValues)[number];
+export type ExerciseQuestion = typeof exerciseQuestions.$inferSelect;
 
 export const users = pgTable("users", {
   id: uuid("id")
@@ -180,6 +182,47 @@ export const assignmentSubmissionsRelations = relations(
     user: one(users, {
       fields: [assignmentSubmissions.userId],
       references: [users.id],
+    }),
+  }),
+);
+
+export const exercises = pgTable("exercises", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  authorId: uuid("author_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  grade: varchar("grade", { length: 10 }).notNull().default("IV"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const exercisesRelations = relations(exercises, ({ one, many }) => ({
+  author: one(users, {
+    fields: [exercises.authorId],
+    references: [users.id],
+  }),
+  questions: many(exerciseQuestions),
+}));
+
+export const exerciseQuestions = pgTable("exercise_questions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  exerciseId: uuid("exercise_id")
+    .notNull()
+    .references(() => exercises.id, { onDelete: "cascade" }),
+  question: text("question").notNull(),
+  correctAnswer: exerciseAnswer("correct_answer").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const exerciseQuestionsRelations = relations(
+  exerciseQuestions,
+  ({ one }) => ({
+    exercise: one(exercises, {
+      fields: [exerciseQuestions.exerciseId],
+      references: [exercises.id],
     }),
   }),
 );
