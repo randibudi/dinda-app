@@ -39,6 +39,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   quizAttempts: many(quizAttempts),
   createdAssignments: many(assignments),
   assignmentSubmissions: many(assignmentSubmissions),
+  exerciseAttempts: many(exerciseAttempts),
 }));
 
 export const learningMaterials = pgTable("learning_materials", {
@@ -204,6 +205,7 @@ export const exercisesRelations = relations(exercises, ({ one, many }) => ({
     references: [users.id],
   }),
   questions: many(exerciseQuestions),
+  attempts: many(exerciseAttempts),
 }));
 
 export const exerciseQuestions = pgTable("exercise_questions", {
@@ -222,6 +224,34 @@ export const exerciseQuestionsRelations = relations(
   ({ one }) => ({
     exercise: one(exercises, {
       fields: [exerciseQuestions.exerciseId],
+      references: [exercises.id],
+    }),
+  }),
+);
+
+export const exerciseAttempts = pgTable("exercise_attempts", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  exerciseId: uuid("exercise_id")
+    .notNull()
+    .references(() => exercises.id, { onDelete: "cascade" }),
+  score: integer("score").notNull(),
+  totalQuestions: integer("total_questions").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const exerciseAttemptsRelations = relations(
+  exerciseAttempts,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [exerciseAttempts.userId],
+      references: [users.id],
+    }),
+    exercise: one(exercises, {
+      fields: [exerciseAttempts.exerciseId],
       references: [exercises.id],
     }),
   }),

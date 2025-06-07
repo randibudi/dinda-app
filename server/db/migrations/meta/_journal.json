@@ -36,6 +36,13 @@
       "when": 1749312058589,
       "tag": "0004_free_mother_askani",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1749316818822,
+      "tag": "0005_far_hawkeye",
+      "breakpoints": true
     }
   ]
 }
