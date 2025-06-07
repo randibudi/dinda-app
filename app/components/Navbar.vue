@@ -14,6 +14,11 @@ const adminLinks = [
     icon: "i-heroicons-question-mark-circle",
   },
   {
+    path: "/admin/latihan",
+    label: "Latihan",
+    icon: "i-heroicons-academic-cap",
+  },
+  {
     path: "/diskusi",
     label: "Diskusi",
     icon: "i-heroicons-chat-bubble-left-ellipsis",
