@@ -17,7 +17,7 @@ const adminLinks = [
   {
     path: "/admin/latihan",
     label: "Latihan",
-    icon: "i-heroicons-academic-cap",
+    icon: "material-symbols:headphones-outline",
   },
   {
     path: "/diskusi",
