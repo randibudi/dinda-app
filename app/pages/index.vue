@@ -41,10 +41,10 @@ const items = [
 
         <div class="mt-6 flex justify-around">
           <NuxtLink
-            to="/panduan-penggunaan"
+            to="/petunjuk-penggunaan"
             class="flex size-[94px] cursor-pointer items-center justify-center rounded-xl bg-(--ui-primary) p-2 text-center text-xs font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            Panduan<br />Penggunaan
+            Petunjuk<br />Penggunaan
           </NuxtLink>
 
           <NuxtLink
