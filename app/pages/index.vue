@@ -13,7 +13,7 @@ const items = [
   <div>
     <NuxtLayout>
       <div>
-        <div class="relative overflow-hidden rounded-lg">
+        <div class="relative overflow-hidden rounded-lg aspect-[5/4.5]">
           <UCarousel
             v-slot="{ item }"
             arrows
