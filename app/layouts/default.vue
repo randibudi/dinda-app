@@ -7,14 +7,15 @@ const route = useRoute();
     <!-- Header -->
     <header class="sticky top-0 z-10 bg-(--ui-primary)">
       <div
-        class="mx-auto flex h-[60px] w-full max-w-[480px] items-center gap-4 px-4"
+        class="mx-auto flex h-[60px] w-full max-w-[480px] items-center justify-between gap-4 px-4"
       >
         <slot name="header">
           <img
             src="~/assets/icons/dinda-logo-tagline.png"
             alt="Logo DINDA"
-            class="h-11"
+            class="h-10"
           />
+          <img src="~/assets/icons/uny-logo.png" alt="Logo UNY" class="h-10" />
         </slot>
       </div>
     </header>

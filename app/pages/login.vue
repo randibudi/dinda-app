@@ -60,7 +60,7 @@ if (user.value) {
           <template #header>
             <div class="text-center">
               <h1 class="text-xl font-semibold">Halo, Selamat Datang</h1>
-              <p class="text-sm">Silahkan login terlebih dahulu</p>
+              <p class="text-sm">Silahkan masuk terlebih dahulu menggunakan akunmu</p>
             </div>
           </template>
 
@@ -75,11 +75,11 @@ if (user.value) {
               />
             </UFormField>
 
-            <UFormField label="Password" size="lg">
+            <UFormField label="Kata Sandi" size="lg">
               <UInput
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'"
-                placeholder="Masukkan password"
+                placeholder="Masukkan kata sandi"
                 icon="i-heroicons-lock-closed-20-solid"
                 :ui="{ trailing: 'pe-1' }"
                 class="w-full"
@@ -102,7 +102,7 @@ if (user.value) {
               :disabled="!username || !password"
               :loading="isLoading"
               @click="handleLogin"
-              >Login</UButton
+              >Masuk</UButton
             >
           </div>
         </UCard>

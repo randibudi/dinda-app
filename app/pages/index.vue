@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import gambar1 from '~/assets/imgs/1.png';
+import gambar2 from '~/assets/imgs/2.png';
+import gambar3 from '~/assets/imgs/3.png';
 const items = [
-  "https://picsum.photos/640/640?random=1",
-  "https://picsum.photos/640/640?random=2",
-  "https://picsum.photos/640/640?random=3",
-  "https://picsum.photos/640/640?random=4",
-  "https://picsum.photos/640/640?random=5",
-  "https://picsum.photos/640/640?random=6",
+  gambar1,
+  gambar2,
+  gambar3, 
 ];
 </script>
 
@@ -13,7 +13,7 @@ const items = [
   <div>
     <NuxtLayout>
       <div>
-        <div class="relative overflow-hidden rounded-lg aspect-[5/4.5]">
+        <div class="relative overflow-hidden rounded-lg aspect-[X/Y]">
           <UCarousel
             v-slot="{ item }"
             arrows
@@ -41,10 +41,10 @@ const items = [
 
         <div class="mt-6 flex justify-around">
           <NuxtLink
-            to="/panduan-penggunaan"
+            to="/petunjuk-penggunaan"
             class="flex size-[94px] cursor-pointer items-center justify-center rounded-xl bg-(--ui-primary) p-2 text-center text-xs font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            Panduan<br />Penggunaan
+            Petunjuk<br />Penggunaan
           </NuxtLink>
 
           <NuxtLink

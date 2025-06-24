@@ -97,7 +97,7 @@ const fullName = computed(
               name="i-heroicons-lock-closed"
               class="text-primary-600 h-6 w-6"
             />
-            <span class="text-gray-700">Ubah Password</span>
+            <span class="text-gray-700">Ubah kata sandi</span>
           </div>
 
           <transition name="slide-fade">
@@ -178,7 +178,7 @@ const fullName = computed(
               name="i-heroicons-arrow-left-on-rectangle"
               class="h-6 w-6 text-red-600"
             />
-            <span class="text-gray-700">Logout</span>
+            <span class="text-gray-700">Keluar</span>
           </div>
         </UCard>
       </div>

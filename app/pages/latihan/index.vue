@@ -77,9 +77,9 @@ onMounted(fetchData);
       <!-- Page Header -->
       <div class="mb-8 text-center">
         <h1 class="mb-2 text-3xl font-bold text-gray-900">
-          Latihan Pembelajaran
+          Latihan Keterampilan
         </h1>
-        <p class="text-gray-600">Pilih latihan untuk menguji pemahamanmu</p>
+        <p class="text-gray-600">Pilih latihan untuk berlatih keterampilan menyimak dan berbicara</p>
       </div>
 
       <!-- Exercises List -->
