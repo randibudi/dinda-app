@@ -153,7 +153,7 @@ onMounted(fetchLearningMaterials);
           :loading="isLoading"
           @click="handleCreate()"
         >
-          Simpan Quiz
+          Simpan Kuis
         </UButton>
       </div>
     </NuxtLayout>

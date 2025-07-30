@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLayout>
-      <div>
+      <div class="text-justify">
         <h1 class="mb-6 text-center text-2xl font-bold">
           Capaian Pembelajaran
         </h1>
@@ -14,7 +14,7 @@
               class="mt-1 mr-3 flex-shrink-0 text-xl text-sky-500"
             />
             <div>
-              <h2 class="mb-2 text-lg font-semibold text-gray-800">
+              <h2 class="mb-2 text-lg font-semibold text-gray-900">
                 Elemen Menyimak
               </h2>
               <p class="text-gray-700">
@@ -23,6 +23,73 @@
                 audiovisual, teks aural (teks yang dibacakan dan/atau didengar),
                 dan instruksi lisan berbahasa Sunda.
               </p>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <h1 class="mb-4 text-center text-xl font-bold">
+              Tujuan Pembelajaran
+            </h1>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div
+                  class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+                >
+                  <span class="font-bold text-sky-700">1</span>
+                </div>
+                <p class="text-gray-700">
+                  Peserta didik mampu menangkap bunyi-bunyi bahasa Sunda dengan
+                  tepat, termasuk intonasi dan tekanan yang berbeda dalam setiap
+                  tingkatan undak usuk basa.
+                </p>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+                >
+                  <span class="font-bold text-sky-700">2</span>
+                </div>
+                <p class="text-gray-700">
+                  Peserta didik mampu memahami makna dari teks yang disimak.
+                </p>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+                >
+                  <span class="font-bold text-sky-700">3</span>
+                </div>
+                <p class="text-gray-700">
+                  Peserta didik mampu menginterpretasikan penggunaan undak usuk
+                  basa sesuai konteks kehidupan sehari-hari dengan tepat.
+                </p>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+                >
+                  <span class="font-bold text-sky-700">4</span>
+                </div>
+                <p class="text-gray-700">
+                  Peserta didik mampu menilai ketepatan penggunaan undak usuk
+                  basa dalam kehidupan sehari-hari dengan tepat.
+                </p>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+                >
+                  <span class="font-bold text-sky-700">5</span>
+                </div>
+                <p class="text-gray-700">
+                  Peserta didik mampu menyimpulkan informasi yang diperoleh dari
+                  bahan simak terkait undak usuk basa dengan tepat.
+                </p>
+              </div>
             </div>
           </div>
         </UCard>
@@ -34,7 +101,7 @@
               name="ri:speak-line"
               class="mt-1 mr-3 flex-shrink-0 text-xl text-sky-500"
             />
-            <h2 class="text-lg font-semibold text-gray-800">
+            <h2 class="mb-4 text-lg font-semibold text-gray-900">
               Elemen Berbicara
             </h2>
           </div>
@@ -67,40 +134,12 @@
               </p>
             </div>
 
-            <div class="flex items-start">
-              <div
-                class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
-              >
-                <span class="font-bold text-sky-700">3</span>
-              </div>
-              <p class="text-gray-700">
-                Peserta didik mampu mengungkapkan gagasan dalam suatu percakapan
-                atau diskusi berbahasa Sunda kaidah bahasa dan norma budaya
-                Sunda.
-              </p>
+            <div class="mt-5">
+              <h1 class="mb-4 text-center text-xl font-bold">
+                Tujuan Pembelajaran
+              </h1>
             </div>
 
-            <div class="flex items-start">
-              <div
-                class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
-              >
-                <span class="font-bold text-sky-700">4</span>
-              </div>
-              <p class="text-gray-700">
-                Peserta didik mampu menceritakan kembali dalam bahasa Sunda
-                suatu informasi yang dibaca atau didengar dari tipe teks (fiksi
-                dan nonfiksi) sederhana dengan beragam topik.
-              </p>
-            </div>
-          </div>
-        </UCard>
-
-        <!-- Tujuan Pembelajaran -->
-        <h1 class="mb-4 text-center text-2xl font-bold">Tujuan Pembelajaran</h1>
-
-        <!-- Card Tujuan Pembelajaran -->
-        <UCard class="mb-6 shadow-lg">
-          <div class="space-y-4">
             <div class="flex items-start">
               <div
                 class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
@@ -108,7 +147,9 @@
                 <span class="font-bold text-sky-700">1</span>
               </div>
               <p class="text-gray-700">
-                Menyebutkan permasalahan yang dialami tokoh di dalam cerita.
+                Peserta didik mampu melafalkan kosakata undak usuk basa Sunda
+                dengan lafal dan intonasi yang tepat sesuai tingkatan bahasa
+                yang digunakan.
               </p>
             </div>
 
@@ -119,8 +160,9 @@
                 <span class="font-bold text-sky-700">2</span>
               </div>
               <p class="text-gray-700">
-                Menulis dengan struktur awal-tengah-akhir menggunakan kaidah
-                bahasa yang baik dan benar menggunakan bahasa Sunda.
+                Peserta didik mampu mempraktikkan percakapan sederhana
+                menggunakan basa lemes ketika berbicara dengan guru atau orang
+                yang lebih tua.
               </p>
             </div>
 
@@ -131,8 +173,34 @@
                 <span class="font-bold text-sky-700">3</span>
               </div>
               <p class="text-gray-700">
-                Menggunakan kata-kata berkenaan dengan sikap sopan santun (undak
-                usuk basa).
+                Peserta didik mampu mempraktikkan percakapan sederhana
+                menggunakan basa loma ketika berbicara dengan teman sebaya atau
+                orang yang setara.
+              </p>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+              >
+                <span class="font-bold text-sky-700">4</span>
+              </div>
+              <p class="text-gray-700">
+                Peserta didik mampu merumuskan dan mengajukan pertanyaan
+                menggunakan basa lemes ketika berbicara dengan guru atau
+                narasumber yang lebih tua dengan struktur kalimat yang benar.
+              </p>
+            </div>
+
+            <div class="flex items-start">
+              <div
+                class="mr-3 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sky-100"
+              >
+                <span class="font-bold text-sky-700">5</span>
+              </div>
+              <p class="text-gray-700">
+                Peserta didik mampu menggunakan kosakata undak usuk basa Sunda
+                dalam percakapan sehari-hari dengan tepat.
               </p>
             </div>
           </div>

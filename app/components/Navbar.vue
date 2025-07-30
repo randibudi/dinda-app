@@ -10,7 +10,7 @@ const adminLinks = [
   { path: "/admin/materi", label: "Materi", icon: "i-heroicons-book-open" },
   {
     path: "/admin/quiz",
-    label: "Quiz",
+    label: "Kuis",
     icon: "i-heroicons-question-mark-circle",
   },
   { path: "/admin/tugas", label: "Tugas", icon: "i-heroicons-document-text" },

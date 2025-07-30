@@ -62,12 +62,12 @@ const formatDate = (dateString: string) => {
             {{ material.title }}
           </h1>
 
-          <div class="flex items-center gap-2">
+          <!-- <div class="flex items-center gap-2">
             <UBadge color="gray" variant="subtle">
               <UIcon name="i-heroicons-calendar-20-solid" class="h-4 w-4" />
               {{ formatDate(material.createdAt) }}
             </UBadge>
-          </div>
+          </div> -->
         </div>
 
         <!-- Content Body -->
@@ -89,6 +89,17 @@ const formatDate = (dateString: string) => {
               class="w-full sm:w-auto"
             />
           </div>
+
+          <UButton
+            to="https://padlet.com/alyanabila0014_2/praktik-berbicara-pxt6d7qmdc5h3rma"
+            target="_blank"
+            variant="outline"
+            color="primary"
+            icon="ri:speak-line"
+            label="Praktik Berbicara"
+            trailing
+            class="mt-4 w-full sm:w-auto"
+          />
         </div>
 
         <!-- Action Buttons -->
@@ -107,7 +118,7 @@ const formatDate = (dateString: string) => {
             variant="solid"
             color="primary"
             icon="i-heroicons-academic-cap-20-solid"
-            label="Mulai Quiz"
+            label="Mulai Kuis"
             trailing
             class="justify-center"
           />

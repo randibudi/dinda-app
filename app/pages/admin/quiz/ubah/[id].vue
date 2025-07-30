@@ -54,7 +54,7 @@ const fetchQuizData = async () => {
   } catch (error) {
     toast.add({
       title: "Gagal Memuat Data",
-      description: "Quiz tidak ditemukan atau terjadi kesalahan",
+      description: "Kuis tidak ditemukan atau terjadi kesalahan",
       color: "error",
     });
     await navigateTo("/admin/quiz");
@@ -80,7 +80,7 @@ const handleUpdate = async () => {
 
     toast.add({
       title: "Berhasil!",
-      description: "Quiz berhasil diperbarui",
+      description: "Kuis berhasil diperbarui",
       color: "success",
     });
 
@@ -190,7 +190,7 @@ onMounted(async () => {
           :loading="isLoading"
           @click="handleUpdate"
         >
-          Perbarui Quiz
+          Perbarui Kuis
         </UButton>
       </div>
     </NuxtLayout>

@@ -132,9 +132,9 @@ onMounted(fetchData);
                     >
                       Selesai
                     </UBadge>
-                    <span class="text-sm text-gray-500">
+                    <!-- <span class="text-sm text-gray-500">
                       {{ formatDate(exercise.createdAt) }}
-                    </span>
+                    </span> -->
                   </div>
                 </div>
               </template>

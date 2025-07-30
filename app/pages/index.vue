@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import gambar1 from '~/assets/imgs/1.png';
-import gambar2 from '~/assets/imgs/2.png';
-import gambar3 from '~/assets/imgs/3.png';
-const items = [
-  gambar1,
-  gambar2,
-  gambar3, 
-];
+import gambar1 from "~/assets/imgs/1rev.png";
+import gambar2 from "~/assets/imgs/2.png";
+import gambar3 from "~/assets/imgs/3.png";
+const items = [gambar1, gambar2, gambar3];
 </script>
 
 <template>
   <div>
     <NuxtLayout>
       <div>
-        <div class="relative overflow-hidden rounded-lg aspect-[X/Y]">
+        <div class="relative aspect-[X/Y] overflow-hidden rounded-lg">
           <UCarousel
             v-slot="{ item }"
+            loop
             arrows
             :autoplay="{ delay: 4000 }"
             :items="items"

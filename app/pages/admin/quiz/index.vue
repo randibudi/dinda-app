@@ -105,7 +105,7 @@ const handleDelete = async (id: string) => {
 
     toast.add({
       title: "Sukses",
-      description: "Quiz berhasil dihapus",
+      description: "Kuis berhasil dihapus",
       color: "success",
       icon: "i-heroicons-check-circle-20-solid",
     });
@@ -114,7 +114,7 @@ const handleDelete = async (id: string) => {
   } catch (error: any) {
     toast.add({
       title: "Error",
-      description: error.data?.message || "Gagal menghapus quiz",
+      description: error.data?.message || "Gagal menghapus kuis",
       color: "error",
       icon: "i-heroicons-exclamation-circle-20-solid",
     });
@@ -130,7 +130,7 @@ onMounted(fetchQuizzes);
       <div class="divide-y divide-(--ui-border-accented) overflow-x-auto">
         <div class="flex justify-end pb-4">
           <UButton
-            label="Tambah Quiz"
+            label="Tambah Kuis"
             color="neutral"
             variant="subtle"
             @click="navigateTo('/admin/quiz/tambah')"

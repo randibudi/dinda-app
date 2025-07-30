@@ -153,7 +153,7 @@ onMounted(fetchQuizzesByMaterial);
             name="i-proicons:spinner"
             class="text-primary-500 h-12 w-12 animate-spin"
           />
-          <p class="text-gray-600">Memuat quiz...</p>
+          <p class="text-gray-600">Memuat Kuis...</p>
         </div>
       </div>
 
@@ -173,7 +173,7 @@ onMounted(fetchQuizzesByMaterial);
         <!-- Quiz Header -->
         <div class="mb-6 space-y-3 text-center">
           <h1 class="text-2xl font-bold text-gray-900">
-            Quiz: {{ materialTitle }}
+            Kuis: {{ materialTitle }}
           </h1>
           <UBadge color="primary" variant="subtle" class="text-sm">
             Total Pertanyaan: {{ quizzes.length }}
@@ -182,7 +182,7 @@ onMounted(fetchQuizzesByMaterial);
 
         <!-- Quiz Questions -->
         <div v-if="quizzes.length === 0" class="text-center text-gray-600">
-          Belum ada quiz untuk materi ini.
+          Belum ada kuis untuk materi ini.
         </div>
 
         <div v-else>

@@ -321,9 +321,9 @@ onMounted(fetchDiscussions);
                 <h3 class="font-semibold text-gray-900 dark:text-gray-100">
                   {{ discussion.author?.fullname }}
                 </h3>
-                <p class="text-xs text-gray-500">
+                <!-- <p class="text-xs text-gray-500">
                   {{ formatTimeAgo(discussion.createdAt) }}
-                </p>
+                </p> -->
               </div>
               <div
                 v-if="discussion.authorId === currentUser?.id"
